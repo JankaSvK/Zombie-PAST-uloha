@@ -144,69 +144,38 @@ pocetZombieNDenVylepsenychLudi <- function(n, aktZombie) {
 }
 
 ```
-``` 
-# Počet zombie na 8. deň nákazy, ak sa ľudia bránia  
-pocetZombieNDenVylepsenychLudi(7,1)  
+
+Pre ďalšie výpočty si pripravíme vzorku:
 ```
-> [1] 1262
-
-```
-#Vylepšení, brániaci sa ľudia.
-pocetSkutocnychObeti <- function(pocetObeti){
-  
-}
-
-denZombika <- function(pocetObeti){
-  pocetZombikov <- 1
-  for(i in 1:pocetObeti){
-    pokusany <- rbinom(1,1,0.5)
-    
-    if(pokusany == 1){main = "Počet zombie v jednotlivých miestach v 8. deň", xlab = "Počet miest", ylab = "Počet zombie"
-      pocetZombikov <- pocetZombikov + 1
-    } else {
-      zabilZombie <- rbinom(1,1,0.2)
-      if(zabilZombie == 1){
-        pocetZombikov <- pocetZombikov - 1
-        break
-      }
-    }
-  }
-  return(pocetZombikov)
-}
-denZombika(9)
-
-novyDenVylepsenychLudi <- function(aktZombie) {
-  pocetZombie <- 0
-  for(i in 1:aktZombie){
-    pocetZombie <- pocetZombie + denZombika(rpois(1,5))
-  }
-  return(pocetZombie)
-}
-
-pocetZombieNDenVylepsenychLudi <- function(n, aktZombie) {
-  pocetZombie <- aktZombie
-  for(i in 1:as.integer(n)) {
-    pocetZombie <- novyDenVylepsenychLudi(pocetZombie)
-  }
-  return(pocetZombie)
-}
-
-pocetZombieNDenVylepsenychLudi(7,1)
-udaje <- vector()
+# Uloženie vzorových údajov vylepšených ľudí
+udajeNovychLudi <- vector()
 for(i in 1:100) {
-  udaje <- c(udaje, pocetZombieNDenVylepsenychLudi(7,1))
+  udajeNovychLudi <- c(udajeNovychLudi, pocetZombieNDenVylepsenychLudi(7,1))
 }
-
-pocet <- 0
-for(i in 1:length(udaje)){
-  if(udaje[i] <= 1000) pocet <- pocet + 1
-}
-print(pocet)
-
-paste("Bodovy odhad na 8. den: ", mean(udaje))
-
-hist(udaje, breaks = 20, main = "#zombie v 8. deň s bojujúcimi ľudmi", xlab = "Počet miest", ylab = "Počet zombie")
-
-paste("Pravdepodobnost, ze pcet neprekroci 1000: ", pocet/length(udaje), "%.")
-
 ```
+
+#####a) Stredná hodnota počtu zombie
+```
+# Odhad strednej hodnoty
+paste("Bodovy odhad na 8. den: ", mean(udajeNovychLudi))
+```
+> [1] "Bodovy odhad na 8. den:  871.34"
+
+#####b) Histogram
+```
+# Histogram pre lepších ľudí
+hist(udajeNovychLudi, breaks = 20, main = "#zombie v 8. deň s bojujúcimi ľudmi", xlab = "Počet miest", ylab = "Počet zombie")
+```
+![histogram](http://atrey.karlin.mff.cuni.cz/~jankasvk/myself/hist3.png)
+
+#####b) Pravdepodobnosť, že ich na 8. deň nebude viac než 1000
+Túto pravdepodobnosť vypočítame z našej vzorky a to ako podiel takých kedy ich nebolo viac než 1000 na ôsmy deň v pomere ku všetkým.
+```
+# Pravdepodobnosť, že počet zombí na začiatku 8. dňa neprekročí 1000.
+pocet <- 0
+for(i in 1:length(udajeNovychLudi)){
+  if(udajeNovychLudi[i] <= 1000) pocet <- pocet + 1
+}
+paste("Pravdepodobnosť, že pcet neprekročí 1000: ", pocet/length(udajeNovychLudi), "%.")
+```
+> [1] "Pravdepodobnosť, že pcet neprekročí 1000:  0.68 %."
