@@ -81,11 +81,24 @@ hist(udaje, main="Počet zombie v mestách", ylab="Počet miest", xlab="Počet z
 ```
 ![histogram](http://atrey.karlin.mff.cuni.cz/~jankasvk/myself/hist1.png)
 
+Z grafu by mohlo ísť o normálne rozdelenie, keďže sa to podobá na Gaussovu krivku.
 
+#####d) Shapiro-Wilkov test
+Test vyvrátil normalitu rozdelenia s istotou 0.99991925%.
+```
+# Shapirov test o normalite rozdelenia
 shapiro.test(udaje)
+```
+> Shapiro-Wilk normality test  
+> data:  udaje  
+> W = 0.93366, p-value = 8.075e-05
 
+#####e) Histogram s Gaussovou krivkou normálneh rozdelenia
+```
 hist(udaje, prob=TRUE, breaks = 20, main = "Počet zombie v jednotlivých miestach v 8. deň", xlab = "Počet miest", ylab = "Počet zombie")
 curve(dnorm(x, mean=mean(udaje), sd=sd(udaje)), add=TRUE)
+```
+![histogram](http://atrey.karlin.mff.cuni.cz/~jankasvk/myself/hist2.png)
 
 #Vylepšení, brániaci sa ľudia.
 pocetSkutocnychObeti <- function(pocetObeti){
