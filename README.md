@@ -74,9 +74,13 @@ t.test(udaje, conf.int=TRUE)$conf.int
 #####b) Preukázateľnosť strednej hodnoty
 Nie, nie je možné s istotou 95% preukázať, že stredná hodnota sa líši od 6000. Bodový odhad nám spadá do 95% konfidenčného intervalu, takže tvrdenie nie je možné s 5% hladinou významovosti preukázať.
 
-#####c) Histogrmag
+#####c) Histogram
+```
+# histogram pre počet zombie v mestách
+hist(udaje, main="Počet zombie v mestách", ylab="Počet miest", xlab="Počet zombie")
+```
+![histogram](http://atrey.karlin.mff.cuni.cz/~jankasvk/myself/hist1.png)
 
-hist(udaje)
 
 shapiro.test(udaje)
 
