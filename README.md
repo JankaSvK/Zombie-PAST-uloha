@@ -95,8 +95,9 @@ shapiro.test(udaje)
 
 #####e) Histogram s Gaussovou krivkou normálneh rozdelenia
 ```
+# Histogram s krivkou normálneho rozdelenia
 hist(udaje, prob=TRUE, breaks = 20, main = "Počet zombie v jednotlivých miestach v 8. deň", xlab = "Počet miest", ylab = "Počet zombie")
-curve(dnorm(x, mean=mean(udaje), sd=sd(udaje)), add=TRUE)
+curve(col="red",dnorm(x, mean=mean(udaje), sd=sd(udaje)), add=TRUE)
 ```
 ![histogram](http://atrey.karlin.mff.cuni.cz/~jankasvk/myself/hist2.png)
 
