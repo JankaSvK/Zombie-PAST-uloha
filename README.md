@@ -45,7 +45,7 @@ print(pocetZombieNDen(7,1))
 Výsledok: 
 >4772
 
-###2. Odhad strednej hodnoty zombie na ôsmy deň
+###2. Odhady zombie na ôsmy deň
 Vytvoríme si vzorku 100 miest.
 ```
 # vzorka 100 miest
@@ -101,6 +101,56 @@ curve(col="red",dnorm(x, mean=mean(udaje), sd=sd(udaje)), add=TRUE)
 ```
 ![histogram](http://atrey.karlin.mff.cuni.cz/~jankasvk/myself/hist2.png)
 
+###3. Ľudia schopní bránenia sa
+Podobne ako v prvej úlohe vytvoríme funkcie:
+
+```
+# Simulácia dňa zombíka - zahrhňuje jeho možnú smrť
+# denZombika(#početVyhliadnutýchObetí)
+# - vráti počet zombíkov (vrátane prvého)
+denZombika <- function(pocetObeti){
+  pocetZombikov <- 1
+  for(i in 1:pocetObeti){
+    pokusany <- rbinom(1,1,0.5)
+    if(pokusany == 1){
+      pocetZombikov <- pocetZombikov + 1
+    } else {
+      zabilZombie <- rbinom(1,1,0.2)
+      if(zabilZombie == 1){
+        pocetZombikov <- pocetZombikov - 1
+        break
+      }
+    }
+  }
+  return(pocetZombikov)
+}
+
+# Obdobne ako funkcia novyDen
+novyDenVylepsenychLudi <- function(aktZombie) {
+  pocetZombie <- 0
+  for(i in 1:aktZombie){
+    pocetZombie <- pocetZombie + denZombika(rpois(1,5))
+  }
+  return(pocetZombie)
+}
+
+# Obdobne ako funkcia pocetZombieNDenVylepsenychLudi
+pocetZombieNDenVylepsenychLudi <- function(n, aktZombie) {
+  pocetZombie <- aktZombie
+  for(i in 1:as.integer(n)) {
+    pocetZombie <- novyDenVylepsenychLudi(pocetZombie)
+  }
+  return(pocetZombie)
+}
+
+```
+``` 
+# Počet zombie na 8. deň nákazy, ak sa ľudia bránia  
+pocetZombieNDenVylepsenychLudi(7,1)  
+```
+> [1] 1262
+
+```
 #Vylepšení, brániaci sa ľudia.
 pocetSkutocnychObeti <- function(pocetObeti){
   
