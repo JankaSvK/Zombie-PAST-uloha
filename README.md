@@ -168,7 +168,7 @@ hist(udajeNovychLudi, breaks = 20, main = "#zombie v 8. deň s bojujúcimi ľudm
 ```
 ![histogram](http://atrey.karlin.mff.cuni.cz/~jankasvk/myself/hist3.png)
 
-#####b) Pravdepodobnosť, že ich na 8. deň nebude viac než 1000
+#####c) Pravdepodobnosť, že ich na 8. deň nebude viac než 1000
 Túto pravdepodobnosť vypočítame z našej vzorky a to ako podiel takých kedy ich nebolo viac než 1000 na ôsmy deň v pomere ku všetkým.
 ```
 # Pravdepodobnosť, že počet zombí na začiatku 8. dňa neprekročí 1000.
@@ -176,6 +176,6 @@ pocet <- 0
 for(i in 1:length(udajeNovychLudi)){
   if(udajeNovychLudi[i] <= 1000) pocet <- pocet + 1
 }
-paste("Pravdepodobnosť, že pcet neprekročí 1000: ", pocet/length(udajeNovychLudi), "%.")
+paste("Pravdepodobnosť, že počet neprekročí 1000 je ", pocet/length(udajeNovychLudi), "%.")
 ```
-> [1] "Pravdepodobnosť, že pcet neprekročí 1000:  0.68 %."
+> [1] "Pravdepodobnosť, že počet zombie neprekročí 1000 je 0.68 %."
