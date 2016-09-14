@@ -1,4 +1,4 @@
-Úloha k získaniu zápočtu z predmetu Pravdepodobnosť a štatistika.
+Úloha k získaniu zápočtu z predmetu Pravdepodobnosť a štatistika. 
 Dokumentácia obsahuje priamo všetok kód napísaný v Rku pre vyriešenie úlohy.
 
 ## Jana Bátoryová
